@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            text-align: center;
+        }
+        h1 {
+            text-decoration: underline;
+        }
+        button{
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: capitalize;
+            background-color: rgb(62, 141, 36);
+            color: white;
+        }
+        img {
+            position: absolute;
+            right: 350px;
+            width: 450px;
+            height: 500px;
+        }
+        h1 {
+            font-size: 24px;
+            color: rgb(181, 30, 181);
+        }
+        div {
+            position: absolute;
+            left: 220px;
+        }
+        p, span {
+            text-align: left;
+            list-style: none;
+            font-size: 20px;
+            color: blueviolet;
+            font-weight: bold;
+        }
+        span {
+            color: coral;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <button>generate api</button>
+    <h1 id="name"></h1>
+    <img src="" class="character-img" />
+    <div>
+        <p>Height: <span class="value-1"></span></p> 
+        <p>Mass: <span class="value-2"></span></p>
+        <p>Eye-color: <span class="value-3"></span></p>
+        <p>Gender: <span class="value-4"></span></p> 
+        <p>Hair-color: <span class="value-5"></span></p>
+        <p>Skin-color: <span class="value-6"></span></p>
+        <p>Born-location: <span class="value-7"></span></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("button").on("click", function() {
+                const randNumber = Math.ceil(Math.random() * 83);
+                $.get(`https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/id/${randNumber}.json`, function(data) {
+                    console.log(data);
+                    // console.log(data['name'])
+                    const $name = $("#name")
+                    $name.text(data['name'])
+                    $(".character-img").attr("src", data['image'])
+                    $(".value-1").text(data['height']);
+                    $(".value-2").text(data['mass']);
+                    $(".value-3").text(data['eyeColor']);
+                    $(".value-4").text(data['gender']);
+                    $(".value-5").text(data['hairColor']);
+                    $(".value-6").text(data['skinColor']);
+                    $(".value-7").text(data['bornLocation']);
+                })
+            })
+
+        })
+    </script>
+
+
+</body>
+</html>
